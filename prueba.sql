@@ -91,6 +91,10 @@ INSERT INTO listado_productos(id_factura,id_producto, cantidad) VALUES
 
 ---------------------------------------------------------
 
-SELECT id_factura,id_producto,cantidad,valor_unitario,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id;
+--SELECT id_factura,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id ORDER BY precio_por_producto DESC LIMIT(1);
 
-SELECT cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id;
+--select cliente_id FROM facturas where numero_factura=8;
+
+-- CLIENTE ID que más pagó
+SELECT cliente_id as cliente_ID_mas_Caro FROM facturas where numero_factura IN 
+(SELECT id_factura FROM (SELECT id_factura,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id ORDER BY precio_por_producto DESC LIMIT(1)) as foo);
