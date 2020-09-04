@@ -102,3 +102,8 @@ SELECT cliente_id as cliente_ID_mas_Caro FROM facturas where numero_factura IN
 -- CLIENTE ID que pagó sobre 100
 SELECT DISTINCT(cliente_id) FROM facturas where numero_factura IN 
 (SELECT id_factura FROM (SELECT id_factura,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id WHERE cantidad*valor_unitario>100) AS foo);
+
+-- Cuantos clientes compraron el producto 6
+
+SELECT COUNT(*) FROM clientes c INNER JOIN facturas f ON f.cliente_id=c.id INNER JOIN 
+listado_productos li ON li.id_factura=f.numero_factura WHERE li.id_producto=6;
