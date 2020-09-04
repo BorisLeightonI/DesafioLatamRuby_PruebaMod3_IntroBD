@@ -98,3 +98,7 @@ INSERT INTO listado_productos(id_factura,id_producto, cantidad) VALUES
 -- CLIENTE ID que más pagó
 SELECT cliente_id as cliente_ID_mas_Caro FROM facturas where numero_factura IN 
 (SELECT id_factura FROM (SELECT id_factura,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id ORDER BY precio_por_producto DESC LIMIT(1)) as foo);
+
+-- CLIENTE ID que pagó sobre 100
+SELECT DISTINCT(cliente_id) FROM facturas where numero_factura IN 
+(SELECT id_factura FROM (SELECT id_factura,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id WHERE cantidad*valor_unitario>100) AS foo);
