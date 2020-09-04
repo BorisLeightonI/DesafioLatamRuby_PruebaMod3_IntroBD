@@ -88,3 +88,9 @@ INSERT INTO listado_productos(id_factura,id_producto, cantidad) VALUES
 (6,6,1),
 (7,7,2),(8,8,3),(9,1,4),(10,2,1)
 ;-- Está distribuido por cliente
+
+---------------------------------------------------------
+
+SELECT id_factura,id_producto,cantidad,valor_unitario,cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id;
+
+SELECT cantidad*valor_unitario AS precio_por_producto  FROM listado_productos INNER JOIN productos ON id_producto=productos.id;
